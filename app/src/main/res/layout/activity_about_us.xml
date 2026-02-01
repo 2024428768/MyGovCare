@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutUsActivity">
+
+    <!-- Main Content -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/brand_blue"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@android:color/transparent"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="About Us"
+                app:titleTextColor="@color/white" />
+        </FrameLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_container"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Member 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center_vertical">
+                    <ImageView android:layout_width="100dp" android:layout_height="100dp" android:src="@mipmap/ic_launcher_round" android:layout_marginEnd="16dp" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Name]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder ID]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Group]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Role:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Role]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Member 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center_vertical">
+                    <ImageView android:layout_width="100dp" android:layout_height="100dp" android:src="@mipmap/ic_launcher_round" android:layout_marginEnd="16dp" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Name]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder ID]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Group]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Role:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Role]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Member 3 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center_vertical">
+                    <ImageView android:layout_width="100dp" android:layout_height="100dp" android:src="@mipmap/ic_launcher_round" android:layout_marginEnd="16dp" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Name]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder ID]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Group]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Role:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Role]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Member 4 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center_vertical">
+                    <ImageView android:layout_width="100dp" android:layout_height="100dp" android:src="@mipmap/ic_launcher_round" android:layout_marginEnd="16dp" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Name]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder ID]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Group]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Role:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Role]" android:textColor="?android:attr/textColorPrimary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="false"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

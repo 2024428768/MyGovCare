@@ -1,6 +1,5 @@
 package com.azizul.assignment.individual.mygovcare;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -21,16 +20,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+public class AboutUsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private GoogleMap mMap;
     private DrawerLayout drawerLayout;
 
     @Override
@@ -42,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 SystemBarStyle.dark(Color.TRANSPARENT),
                 SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT));
         
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_about_us);
 
         // --- Toolbar Setup ---
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -68,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             // 1. Main Content: Apply side and bottom padding
             mainContent.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom);
 
-            // 2. Toolbar Container: Apply top padding (instead of the Toolbar itself)
+            // 2. Toolbar Container: Apply top padding
             toolbarContainer.setPadding(0, systemBars.top, 0, 0);
 
             // 3. Side Menu (NavigationView)
@@ -99,24 +91,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
 
-        // --- Map Initialization ---
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map_container);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
-
-        if (savedInstanceState == null) {
-            navigationView.setCheckedItem(R.id.nav_home);
-        }
-    }
-
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        mMap = googleMap;
-        LatLng kl = new LatLng(3.1390, 101.6869);
-        mMap.addMarker(new MarkerOptions().position(kl).title("Marker in Kuala Lumpur"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kl, 10f));
+        navigationView.setCheckedItem(R.id.nav_about);
     }
 
     @Override
@@ -124,11 +99,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Already here
+            finish();
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_about) {
-            startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+            // Already here
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
