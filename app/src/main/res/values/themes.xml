@@ -11,6 +11,26 @@
         
         <!-- Control icon visibility in status bar (white icons) -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
+        <!-- Remove side margins from Navigation Drawer items and style selection -->
+        <item name="navigationViewStyle">@style/Widget.MyGovCare.NavigationView</item>
+    </style>
+
+    <style name="Widget.MyGovCare.NavigationView" parent="Widget.Material3.NavigationView">
+        <!-- Removes the horizontal margin/padding of the items -->
+        <item name="itemShapeInsetStart">0dp</item>
+        <item name="itemShapeInsetEnd">0dp</item>
+        <!-- Makes the selection box square-ish (fills width) -->
+        <item name="itemShapeAppearance">@style/ShapeAppearance.MyGovCare.NavFlat</item>
+        <!-- Apply semi-transparent brand blue to the background of selected item -->
+        <item name="itemBackground">@drawable/nav_item_background</item>
+        <!-- Apply brand blue to the icons and text of selected item -->
+        <item name="itemIconTint">@color/nav_item_color_state</item>
+        <item name="itemTextColor">@color/nav_item_color_state</item>
+    </style>
+
+    <style name="ShapeAppearance.MyGovCare.NavFlat" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">0dp</item>
     </style>
 
     <style name="Theme.MyGovCare" parent="Base.Theme.MyGovCare" />

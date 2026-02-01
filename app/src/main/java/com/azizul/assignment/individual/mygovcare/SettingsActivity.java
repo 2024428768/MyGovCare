@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,16 +23,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+public class SettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private GoogleMap mMap;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
@@ -43,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 SystemBarStyle.dark(Color.TRANSPARENT),
                 SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT));
         
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_settings);
 
         // --- Toolbar Setup ---
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -59,6 +54,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 R.string.nav_open, R.string.nav_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        // --- Spinner Setup ---
+        Spinner spinnerColors = findViewById(R.id.spinner_colors);
+        String[] colors = {"Brand Blue", "Deep Red", "Green", "Dark Grey"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colors);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerColors.setAdapter(adapter);
 
         // --- Manual Inset Handling for Styling and Padding ---
         View mainContent = findViewById(R.id.main_content);
@@ -93,29 +95,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
 
-        // --- Map Initialization ---
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map_container);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Ensure Home is selected when returning to this activity
-        if (navigationView != null) {
-            navigationView.setCheckedItem(R.id.nav_home);
-        }
-    }
-
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        mMap = googleMap;
-        LatLng kl = new LatLng(3.1390, 101.6869);
-        mMap.addMarker(new MarkerOptions().position(kl).title("Marker in Kuala Lumpur"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kl, 10f));
+        navigationView.setCheckedItem(R.id.nav_settings);
     }
 
     @Override
@@ -123,13 +103,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Toast.makeText(this, "Home selected", Toast.LENGTH_SHORT).show();
+            finish(); // Go back to MainActivity
         } else if (id == R.id.nav_settings) {
-            Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            // Already here
         } else if (id == R.id.nav_about) {
-            Toast.makeText(this, "About Us selected", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+            startActivity(new Intent(SettingsActivity.this, AboutUsActivity.class));
+            finish();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
