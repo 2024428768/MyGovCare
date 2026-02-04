@@ -1,5 +1,6 @@
 package com.azizul.assignment.individual.mygovcare;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -99,9 +100,12 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            Toast.makeText(this, "Home selected", Toast.LENGTH_SHORT).show();
             finish();
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(AboutUsActivity.this, SettingsActivity.class));
+            finish();
         } else if (id == R.id.nav_about) {
             // Already here
         }

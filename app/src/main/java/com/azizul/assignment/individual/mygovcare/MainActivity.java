@@ -123,12 +123,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            Toast.makeText(this, "Home selected", Toast.LENGTH_SHORT).show();
+            // Already here
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, SettingsActivity.class));
         } else if (id == R.id.nav_about) {
-            Toast.makeText(this, "About Us selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "About selected", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
         }
 

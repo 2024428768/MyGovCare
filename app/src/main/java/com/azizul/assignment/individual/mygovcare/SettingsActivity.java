@@ -103,10 +103,12 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            finish(); // Go back to MainActivity
+            Toast.makeText(this, "Home selected", Toast.LENGTH_SHORT).show();
+            finish();
         } else if (id == R.id.nav_settings) {
             // Already here
         } else if (id == R.id.nav_about) {
+            Toast.makeText(this, "About selected", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SettingsActivity.this, AboutUsActivity.class));
             finish();
         }

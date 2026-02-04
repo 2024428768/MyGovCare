@@ -5,13 +5,15 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".AboutUsActivity">
 
     <!-- Main Content -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <FrameLayout
             android:id="@+id/toolbar_container"
@@ -29,7 +31,7 @@
                 android:background="@android:color/transparent"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:title="About Us"
+                app:title="About"
                 app:titleTextColor="@color/white" />
         </FrameLayout>
 
@@ -37,6 +39,7 @@
             android:id="@+id/scroll_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@color/white"
             app:layout_constraintTop_toBottomOf="@id/toolbar_container"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,32 +49,66 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:background="@color/white">
+
+                <!-- Developers' Information -->
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Developers' Information"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/brand_blue" />
 
                 <!-- Member 1 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:padding="12dp"
+                    android:background="@drawable/member_outline"
                     android:gravity="center_vertical">
-                    <ImageView android:layout_width="100dp" android:layout_height="100dp" android:src="@mipmap/ic_launcher_round" android:layout_marginEnd="16dp" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/img_1" />
+
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@color/brand_blue"
+                        android:layout_gravity="center_vertical" />
+
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Name]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Azizul Hakim Bin Aznan" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder ID]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2024428768" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Group]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="D1CS2405A" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Role:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Role]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Programme:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CS240" android:textColor="@color/black"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -81,25 +118,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:padding="12dp"
+                    android:background="@drawable/member_outline"
                     android:gravity="center_vertical">
-                    <ImageView android:layout_width="100dp" android:layout_height="100dp" android:src="@mipmap/ic_launcher_round" android:layout_marginEnd="16dp" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/img_3" />
+
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@color/brand_blue"
+                        android:layout_gravity="center_vertical" />
+
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Name]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Farah Nur Idayu Binti Zainal Abiddin" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder ID]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2024652272" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Group]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="D1CS2405D" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Role:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Role]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Programme:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CS240" android:textColor="@color/black"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -109,25 +161,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:padding="12dp"
+                    android:background="@drawable/member_outline"
                     android:gravity="center_vertical">
-                    <ImageView android:layout_width="100dp" android:layout_height="100dp" android:src="@mipmap/ic_launcher_round" android:layout_marginEnd="16dp" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/img" />
+
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@color/brand_blue"
+                        android:layout_gravity="center_vertical" />
+
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Name]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Syahidatul Atikah Binti Saharuddin" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder ID]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2024647216" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Group]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="D1CS2405D" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Role:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Role]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Programme:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CS240" android:textColor="@color/black"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -138,27 +205,161 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginBottom="24dp"
+                    android:padding="12dp"
+                    android:background="@drawable/member_outline"
                     android:gravity="center_vertical">
-                    <ImageView android:layout_width="100dp" android:layout_height="100dp" android:src="@mipmap/ic_launcher_round" android:layout_marginEnd="16dp" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/img_2" />
+
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@color/brand_blue"
+                        android:layout_gravity="center_vertical" />
+
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Name]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Name:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mastura Nabilah Binti Mazlan" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder ID]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Student ID:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2024938863" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Group]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Group:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="D1CS2405C" android:textColor="@color/black" />
                         </LinearLayout>
                         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="Role:" android:textStyle="bold" android:textColor="?android:attr/textColorPrimary"/>
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="[Placeholder Role]" android:textColor="?android:attr/textColorPrimary"/>
+                            <TextView android:layout_width="90dp" android:layout_height="wrap_content" android:text="Programme:" android:textStyle="bold" android:textColor="@color/black"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CS240" android:textColor="@color/black"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+
+                <!-- Relevant URLs -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Relevant URLs"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/brand_blue" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+                    <TextView
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:text="GitHub Repository:"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[GitHub Link Placeholder]"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:text="App Demonstration (YouTube):"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[YouTube Link Placeholder]"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <!-- Copyright Statement -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Copyright Statement"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+
+                <View
+                    android:id="@+id/divider_copyright"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/brand_blue" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Copyright © 2024 MyGovCare"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="All rights reserved. This application is developed for educational purposes."
+                    android:textColor="@color/black"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="This project is licensed under the MIT License."
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:textColor="@color/black"
+                    android:text="Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:textColor="@color/black"
+                    android:text="The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software." />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:textColor="@color/black"
+                    android:text="THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE." />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
