@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MyGovCare" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Light theme colors -->
-        <item name="colorPrimary">@color/brand_blue</item>
+        <item name="colorPrimary">?attr/brandColor</item>
         <item name="colorOnPrimary">@color/white</item>
-        
+
         <!-- Force status and navigation bars to match the brand color -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        
+
         <!-- Control icon visibility in status bar (white icons) -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
 
@@ -33,5 +33,19 @@
         <item name="cornerSize">0dp</item>
     </style>
 
-    <style name="Theme.MyGovCare" parent="Base.Theme.MyGovCare" />
+    <style name="Theme.MyGovCare" parent="Base.Theme.MyGovCare">
+        <item name="brandColor">@color/brand_blue</item>
+    </style>
+
+    <style name="Theme.MyGovCare.Blue" parent="Base.Theme.MyGovCare">
+        <item name="brandColor">@color/brand_blue</item>
+    </style>
+
+    <style name="Theme.MyGovCare.Red" parent="Base.Theme.MyGovCare">
+        <item name="brandColor">@color/brand_red</item>
+    </style>
+
+    <style name="Theme.MyGovCare.Green" parent="Base.Theme.MyGovCare">
+        <item name="brandColor">@color/brand_green</item>
+    </style>
 </resources>

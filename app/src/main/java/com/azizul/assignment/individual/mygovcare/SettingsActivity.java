@@ -1,10 +1,12 @@
 package com.azizul.assignment.individual.mygovcare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -28,16 +30,24 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "theme_prefs";
+    private static final String THEME_KEY = "current_theme";
+    private int currentTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        currentTheme = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        setTheme(currentTheme);
+
         super.onCreate(savedInstanceState);
-        
+
         // Enable Edge-to-Edge with white icons
-        EdgeToEdge.enable(this, 
+        EdgeToEdge.enable(this,
                 SystemBarStyle.dark(Color.TRANSPARENT),
                 SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT));
-        
+
         setContentView(R.layout.activity_settings);
 
         // --- Toolbar Setup ---
@@ -57,10 +67,50 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
         // --- Spinner Setup ---
         Spinner spinnerColors = findViewById(R.id.spinner_colors);
-        String[] colors = {"Brand Blue", "Deep Red", "Green", "Dark Grey"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, colors);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.color_options,
+                android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerColors.setAdapter(adapter);
+
+        int currentThemeResId = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        if (currentThemeResId == R.style.Theme_MyGovCare_Blue) {
+            spinnerColors.setSelection(0);
+        } else if (currentThemeResId == R.style.Theme_MyGovCare_Red) {
+            spinnerColors.setSelection(1);
+        } else if (currentThemeResId == R.style.Theme_MyGovCare_Green) {
+            spinnerColors.setSelection(2);
+        }
+
+        spinnerColors.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int selectedTheme = 0;
+                switch (position) {
+                    case 0: // Blue
+                        selectedTheme = R.style.Theme_MyGovCare_Blue;
+                        break;
+                    case 1: // Red
+                        selectedTheme = R.style.Theme_MyGovCare_Red;
+                        break;
+                    case 2: // Green
+                        selectedTheme = R.style.Theme_MyGovCare_Green;
+                        break;
+                }
+
+                if (sharedPreferences.getInt(THEME_KEY, 0) != selectedTheme) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt(THEME_KEY, selectedTheme);
+                    editor.apply();
+                    recreate();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
 
         // --- Manual Inset Handling for Styling and Padding ---
         View mainContent = findViewById(R.id.main_content);
@@ -75,8 +125,8 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                 int padding16 = (int) (16 * density);
                 header.setPadding(padding16, systemBars.top + padding16, padding16, padding16);
             }
-            navigationView.setPadding(navigationView.getPaddingLeft(), navigationView.getPaddingTop(), 
-                                      navigationView.getPaddingRight(), systemBars.bottom);
+            navigationView.setPadding(navigationView.getPaddingLeft(), navigationView.getPaddingTop(),
+                    navigationView.getPaddingRight(), systemBars.bottom);
             return insets;
         });
 
@@ -96,6 +146,15 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         getOnBackPressedDispatcher().addCallback(this, callback);
 
         navigationView.setCheckedItem(R.id.nav_settings);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int newTheme = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        if (this.currentTheme != newTheme) {
+            recreate();
+        }
     }
 
     @Override

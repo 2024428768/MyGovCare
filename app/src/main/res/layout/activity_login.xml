@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/brand_blue"
+    android:background="?attr/brandColor"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -32,7 +32,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:contentDescription="App Logo"
-                android:src="@drawable/logo_blue" />
+                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -129,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/brand_blue"
+                android:backgroundTint="?attr/brandColor"
                 android:text="Login"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
@@ -193,7 +193,7 @@
                 android:id="@+id/et_signup_verify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="44dp"
                 android:background="@drawable/edit_text_outline"
                 android:hint="Verify password"
                 android:inputType="textPassword"
@@ -206,7 +206,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="@color/brand_blue"
+                android:backgroundTint="?attr/brandColor"
                 android:text="Sign Up"
                 android:textColor="@color/white"
                 android:textSize="20dp" />

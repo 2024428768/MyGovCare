@@ -2,4 +2,9 @@
     <string name="app_name">MyGovCare</string>
     <string name="nav_open">Open navigation drawer</string>
     <string name="nav_close">Close navigation drawer</string>
+    <string-array name="color_options">
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Green</item>
+    </string-array>
 </resources>

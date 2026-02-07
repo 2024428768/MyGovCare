@@ -1,6 +1,7 @@
 package com.azizul.assignment.individual.mygovcare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -25,16 +26,24 @@ import com.google.android.material.navigation.NavigationView;
 public class AboutUsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "theme_prefs";
+    private static final String THEME_KEY = "current_theme";
+    private int currentTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        currentTheme = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        setTheme(currentTheme);
+
         super.onCreate(savedInstanceState);
-        
+
         // Enable Edge-to-Edge with white icons
-        EdgeToEdge.enable(this, 
+        EdgeToEdge.enable(this,
                 SystemBarStyle.dark(Color.TRANSPARENT),
                 SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT));
-        
+
         setContentView(R.layout.activity_about_us);
 
         // --- Toolbar Setup ---
@@ -71,8 +80,8 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
                 int padding16 = (int) (16 * density);
                 header.setPadding(padding16, systemBars.top + padding16, padding16, padding16);
             }
-            navigationView.setPadding(navigationView.getPaddingLeft(), navigationView.getPaddingTop(), 
-                                      navigationView.getPaddingRight(), systemBars.bottom);
+            navigationView.setPadding(navigationView.getPaddingLeft(), navigationView.getPaddingTop(),
+                    navigationView.getPaddingRight(), systemBars.bottom);
 
             return insets;
         });
@@ -93,6 +102,15 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
         getOnBackPressedDispatcher().addCallback(this, callback);
 
         navigationView.setCheckedItem(R.id.nav_about);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int newTheme = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        if (this.currentTheme != newTheme) {
+            recreate();
+        }
     }
 
     @Override

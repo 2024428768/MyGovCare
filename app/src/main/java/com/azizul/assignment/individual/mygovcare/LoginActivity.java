@@ -1,16 +1,18 @@
 package com.azizul.assignment.individual.mygovcare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.SystemBarStyle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -21,9 +23,16 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnSignupTab;
     private LinearLayout llLoginSection;
     private LinearLayout llSignupSection;
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "theme_prefs";
+    private static final String THEME_KEY = "current_theme";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        int themeResId = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        setTheme(themeResId);
+
         super.onCreate(savedInstanceState);
 
         // Enable Edge-to-Edge with white icons (dark status bar style)
@@ -56,32 +65,78 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Set initial state
-        showLoginSection();
+        llLoginSection.setVisibility(View.VISIBLE);
+        llSignupSection.setVisibility(View.GONE);
+        updateButtonStyles(true);
     }
 
     private void showLoginSection() {
-        llLoginSection.setVisibility(View.VISIBLE);
-        llSignupSection.setVisibility(View.GONE);
+        if (llLoginSection.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        updateButtonStyles(true);
 
-        btnLoginTab.setBackgroundResource(R.drawable.button_active);
-        btnLoginTab.setTextColor(Color.WHITE);
-        btnLoginTab.setActivated(true);
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) { }
 
-        btnSignupTab.setBackgroundResource(R.drawable.button_inactive);
-        btnSignupTab.setTextColor(Color.BLACK);
-        btnSignupTab.setActivated(false);
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                llSignupSection.setVisibility(View.GONE);
+                Animation fadeIn = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fade_in);
+                llLoginSection.startAnimation(fadeIn);
+                llLoginSection.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
+        llSignupSection.startAnimation(fadeOut);
     }
 
     private void showSignupSection() {
-        llLoginSection.setVisibility(View.GONE);
-        llSignupSection.setVisibility(View.VISIBLE);
+        if (llSignupSection.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        updateButtonStyles(false);
 
-        btnSignupTab.setBackgroundResource(R.drawable.button_active);
-        btnSignupTab.setTextColor(Color.WHITE);
-        btnSignupTab.setActivated(true);
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) { }
 
-        btnLoginTab.setBackgroundResource(R.drawable.button_inactive);
-        btnLoginTab.setTextColor(Color.BLACK);
-        btnLoginTab.setActivated(false);
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                llLoginSection.setVisibility(View.GONE);
+                Animation fadeIn = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.fade_in);
+                llSignupSection.startAnimation(fadeIn);
+                llSignupSection.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
+        llLoginSection.startAnimation(fadeOut);
+    }
+
+    private void updateButtonStyles(boolean isLoginActive) {
+        if (isLoginActive) {
+            btnLoginTab.setBackgroundResource(R.drawable.button_active);
+            btnLoginTab.setTextColor(Color.WHITE);
+            btnLoginTab.setActivated(true);
+
+            btnSignupTab.setBackgroundResource(R.drawable.button_inactive);
+            btnSignupTab.setTextColor(Color.BLACK);
+            btnSignupTab.setActivated(false);
+        } else {
+            btnSignupTab.setBackgroundResource(R.drawable.button_active);
+            btnSignupTab.setTextColor(Color.WHITE);
+            btnSignupTab.setActivated(true);
+
+            btnLoginTab.setBackgroundResource(R.drawable.button_inactive);
+            btnLoginTab.setTextColor(Color.BLACK);
+            btnLoginTab.setActivated(false);
+        }
     }
 }
