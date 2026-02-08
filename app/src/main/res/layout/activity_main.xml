@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="14dp"
-            android:text="Welcome "
+            android:text="Welcome,"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -67,12 +67,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Where are we going today?"
-            android:textSize="18sp"
+            android:text="Nearest clinic and hospital are marked"
             android:textColor="?android:attr/textColorPrimary"
-            app:layout_constraintTop_toBottomOf="@id/tv_welcome"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_welcome"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tv_welcome" />
 
         <!-- Map Container -->
         <androidx.fragment.app.FragmentContainerView

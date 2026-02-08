@@ -76,7 +76,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         int currentThemeResId = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
         if (currentThemeResId == R.style.Theme_MyGovCare_Blue) {
             spinnerColors.setSelection(0);
-        } else if (currentThemeResId == R.style.Theme_MyGovCare_Red) {
+        } else if (currentThemeResId == R.style.Theme_MyGovCare_Orange) {
             spinnerColors.setSelection(1);
         } else if (currentThemeResId == R.style.Theme_MyGovCare_Green) {
             spinnerColors.setSelection(2);
@@ -90,8 +90,8 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                     case 0: // Blue
                         selectedTheme = R.style.Theme_MyGovCare_Blue;
                         break;
-                    case 1: // Red
-                        selectedTheme = R.style.Theme_MyGovCare_Red;
+                    case 1: // Orange
+                        selectedTheme = R.style.Theme_MyGovCare_Orange;
                         break;
                     case 2: // Green
                         selectedTheme = R.style.Theme_MyGovCare_Green;
@@ -163,6 +163,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
         if (id == R.id.nav_home) {
             Toast.makeText(this, "Home selected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(SettingsActivity.this, MainActivity.class));
             finish();
         } else if (id == R.id.nav_settings) {
             // Already here

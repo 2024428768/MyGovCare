@@ -4,7 +4,7 @@
     <string name="nav_close">Close navigation drawer</string>
     <string-array name="color_options">
         <item>Blue</item>
-        <item>Red</item>
+        <item>Purple</item>
         <item>Green</item>
     </string-array>
 </resources>

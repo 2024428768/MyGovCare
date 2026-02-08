@@ -83,7 +83,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="visible"
+            tools:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -141,7 +142,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -185,7 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Verify:"
+                android:text="Verify Password:"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -193,7 +195,7 @@
                 android:id="@+id/et_signup_verify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/edit_text_outline"
                 android:hint="Verify password"
                 android:inputType="textPassword"

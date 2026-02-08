@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="brand_blue">#046cb8</color>
-    <color name="brand_red">#B71C1C</color>
+    <color name="brand_orange">#673AB7</color>
     <color name="brand_green">#1B5E20</color>
-    <!-- 20% opacity brand blue -->
+    <!-- 20% opacity brand colors -->
     <color name="brand_blue_alpha_20">#33046cb8</color>
+    <color name="brand_orange_alpha_20">#33673AB7</color>
+    <color name="brand_green_alpha_20">#331B5E20</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="logout_red">#D32F2F</color>

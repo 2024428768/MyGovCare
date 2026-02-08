@@ -1,14 +1,39 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme for dark mode. -->
     <style name="Base.Theme.MyGovCare" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Dark theme colors -->
-        <item name="colorPrimary">@color/brand_blue</item>
+        <item name="colorPrimary">?attr/brandColor</item>
         <item name="colorOnPrimary">@color/white</item>
-        
-        <!-- Keep the bars blue even in dark mode for branding consistency -->
+
+        <!-- Keep the bars branded for consistency -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
+        <!-- Use light icons on status bar for dark theme -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+
+        <!-- Apply custom navigation view style -->
+        <item name="navigationViewStyle">@style/Widget.MyGovCare.NavigationView</item>
+    </style>
+
+    <!-- Main theme definitions for dark mode -->
+    <style name="Theme.MyGovCare" parent="Base.Theme.MyGovCare">
+        <item name="brandColor">@color/brand_blue</item>
+        <item name="brandColorAlpha20">@color/brand_blue_alpha_20</item>
+    </style>
+
+    <style name="Theme.MyGovCare.Blue" parent="Base.Theme.MyGovCare">
+        <item name="brandColor">@color/brand_blue</item>
+        <item name="brandColorAlpha20">@color/brand_blue_alpha_20</item>
+    </style>
+
+    <style name="Theme.MyGovCare.Orange" parent="Base.Theme.MyGovCare">
+        <item name="brandColor">@color/brand_orange</item>
+        <item name="brandColorAlpha20">@color/brand_orange_alpha_20</item>
+    </style>
+
+    <style name="Theme.MyGovCare.Green" parent="Base.Theme.MyGovCare">
+        <item name="brandColor">@color/brand_green</item>
+        <item name="brandColorAlpha20">@color/brand_green_alpha_20</item>
     </style>
 </resources>

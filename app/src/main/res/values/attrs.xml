@@ -1,3 +1,4 @@
 <resources>
     <attr name="brandColor" format="color" />
+    <attr name="brandColorAlpha20" format="color" />
 </resources>

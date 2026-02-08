@@ -119,6 +119,7 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
 
         if (id == R.id.nav_home) {
             Toast.makeText(this, "Home selected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(AboutUsActivity.this, MainActivity.class));
             finish();
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
