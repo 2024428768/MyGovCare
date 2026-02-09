@@ -30,20 +30,28 @@
     <style name="Theme.MyGovCare" parent="Base.Theme.MyGovCare">
         <item name="brandColor">@color/brand_blue</item>
         <item name="brandColorAlpha20">@color/brand_blue_alpha_20</item>
+        <item name="infoWindowBackground">@color/info_window_background_blue</item>
+        <item name="infoWindowStrokeColor">@color/info_window_stroke_blue</item>
     </style>
 
     <style name="Theme.MyGovCare.Blue" parent="Base.Theme.MyGovCare">
         <item name="brandColor">@color/brand_blue</item>
         <item name="brandColorAlpha20">@color/brand_blue_alpha_20</item>
+        <item name="infoWindowBackground">@color/info_window_background_blue</item>
+        <item name="infoWindowStrokeColor">@color/info_window_stroke_blue</item>
     </style>
 
     <style name="Theme.MyGovCare.Orange" parent="Base.Theme.MyGovCare">
         <item name="brandColor">@color/brand_orange</item>
         <item name="brandColorAlpha20">@color/brand_orange_alpha_20</item>
+        <item name="infoWindowBackground">@color/info_window_background_orange</item>
+        <item name="infoWindowStrokeColor">@color/info_window_stroke_orange</item>
     </style>
 
     <style name="Theme.MyGovCare.Green" parent="Base.Theme.MyGovCare">
         <item name="brandColor">@color/brand_green</item>
         <item name="brandColorAlpha20">@color/brand_green_alpha_20</item>
+        <item name="infoWindowBackground">@color/info_window_background_green</item>
+        <item name="infoWindowStrokeColor">@color/info_window_stroke_green</item>
     </style>
 </resources>

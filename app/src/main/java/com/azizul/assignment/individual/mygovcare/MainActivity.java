@@ -1,8 +1,12 @@
 package com.azizul.assignment.individual.mygovcare;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,25 +14,36 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.SystemBarStyle;
 import androidx.activity.OnBackPressedCallback;
+import androidx.activity.SystemBarStyle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.navigation.NavigationView;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String PREFS_NAME = "theme_prefs";
     private static final String THEME_KEY = "current_theme";
     private int currentTheme;
+    private final String API_URL = "http://10.0.2.2/MyGovCare/MyGovCare.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +124,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // --- Map Initialization ---
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_container);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
+        mapFragment.getMapAsync(this);
+
+        // --- FAB Setup ---
+        FloatingActionButton fabRecenter = findViewById(R.id.fab_recenter);
+        fabRecenter.setOnClickListener(v -> {
+            if (mMap != null) {
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(5.75951038844194, 102.27496615814267)));
+            }
+        });
     }
 
     private void updateNavHeaderLogo(int themeResId) {
@@ -141,9 +163,54 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng kl = new LatLng(3.1390, 101.6869);
-        mMap.addMarker(new MarkerOptions().position(kl).title("Marker in Kuala Lumpur"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kl, 10f));
+
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this));
+
+        // Center map on "Campus"
+        LatLng campusLocation = new LatLng(5.75951038844194, 102.27496615814267);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusLocation, 14));
+
+        // Add a marker for the user's location
+        Drawable locationDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_my_location, getTheme());
+        BitmapDescriptor locationIcon = getMarkerIconFromDrawable(locationDrawable);
+
+        mMap.addMarker(new MarkerOptions()
+                .position(campusLocation)
+                .icon(locationIcon)
+                .anchor(0.5f, 0.5f) // Center the icon on the location
+                .flat(true)); // Keep the icon flat on the map
+
+        fetchPublicHealth();
+
+    }
+
+    private void fetchPublicHealth() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, API_URL, null,
+                response -> {
+                    try {
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject shop = response.getJSONObject(i);
+
+                            String name = shop.getString("name");
+                            String details = shop.getString("details");
+                            double lat = shop.getDouble("lat");
+                            double lng = shop.getDouble("lng");
+
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(lat, lng))
+                                    .title(name)
+                                    .snippet(details));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show()
+        );
+
+        queue.add(request);
     }
 
     @Override
@@ -164,5 +231,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 }

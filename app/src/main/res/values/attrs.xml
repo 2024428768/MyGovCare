@@ -1,4 +1,6 @@
 <resources>
     <attr name="brandColor" format="color" />
     <attr name="brandColorAlpha20" format="color" />
+    <attr name="infoWindowBackground" format="color" />
+    <attr name="infoWindowStrokeColor" format="color" />
 </resources>

@@ -10,4 +10,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="logout_red">#D32F2F</color>
+
+    <!-- Info Window Colors -->
+    <color name="info_window_background_blue">#E3F2FD</color>
+    <color name="info_window_stroke_blue">#023E8A</color>
+    <color name="info_window_background_orange">#EDE7F6</color>
+    <color name="info_window_stroke_orange">#4527A0</color>
+    <color name="info_window_background_green">#E8F5E9</color>
+    <color name="info_window_stroke_green">#003d00</color>
 </resources>
