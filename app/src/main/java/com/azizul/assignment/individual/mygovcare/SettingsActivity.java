@@ -1,13 +1,16 @@
 package com.azizul.assignment.individual.mygovcare;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -59,6 +62,8 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        updateNavHeaderLogo(currentTheme);
+
         // --- ActionBarDrawerToggle Setup ---
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.nav_open, R.string.nav_close);
@@ -86,15 +91,20 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int selectedTheme = 0;
+                String selectedAlias = null;
+
                 switch (position) {
                     case 0: // Blue
                         selectedTheme = R.style.Theme_MyGovCare_Blue;
+                        selectedAlias = ".LoginActivityBlue";
                         break;
                     case 1: // Orange
                         selectedTheme = R.style.Theme_MyGovCare_Orange;
+                        selectedAlias = ".LoginActivityOrange";
                         break;
                     case 2: // Green
                         selectedTheme = R.style.Theme_MyGovCare_Green;
+                        selectedAlias = ".LoginActivityGreen";
                         break;
                 }
 
@@ -102,6 +112,11 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt(THEME_KEY, selectedTheme);
                     editor.apply();
+
+                    if (selectedAlias != null) {
+                        updateAppIcon(selectedAlias);
+                    }
+
                     recreate();
                 }
             }
@@ -146,6 +161,35 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         getOnBackPressedDispatcher().addCallback(this, callback);
 
         navigationView.setCheckedItem(R.id.nav_settings);
+    }
+
+    private void updateAppIcon(String selectedAlias) {
+        PackageManager pm = getPackageManager();
+        String packageName = getPackageName();
+
+        // Disable all aliases
+        pm.setComponentEnabledSetting(new ComponentName(packageName, packageName + ".LoginActivityBlue"),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(new ComponentName(packageName, packageName + ".LoginActivityOrange"),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(new ComponentName(packageName, packageName + ".LoginActivityGreen"),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+
+        // Enable the selected alias
+        pm.setComponentEnabledSetting(new ComponentName(packageName, packageName + selectedAlias),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+    }
+
+    private void updateNavHeaderLogo(int themeResId) {
+        View headerView = navigationView.getHeaderView(0);
+        ImageView ivNavHeaderLogo = headerView.findViewById(R.id.iv_nav_header_logo);
+        if (themeResId == R.style.Theme_MyGovCare_Blue) {
+            ivNavHeaderLogo.setImageResource(R.drawable.logo_blue);
+        } else if (themeResId == R.style.Theme_MyGovCare_Orange) {
+            ivNavHeaderLogo.setImageResource(R.drawable.logo_purple);
+        } else if (themeResId == R.style.Theme_MyGovCare_Green) {
+            ivNavHeaderLogo.setImageResource(R.drawable.logo_green);
+        }
     }
 
     @Override

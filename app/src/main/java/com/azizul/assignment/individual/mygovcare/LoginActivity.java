@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "theme_prefs";
     private static final String THEME_KEY = "current_theme";
+    private ImageView ivLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +52,13 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
+        ivLogo = findViewById(R.id.iv_logo);
         btnLoginTab = findViewById(R.id.btn_login_tab);
         btnSignupTab = findViewById(R.id.btn_signup_tab);
         llLoginSection = findViewById(R.id.ll_login_section);
         llSignupSection = findViewById(R.id.ll_signup_section);
+
+        updateLogo(themeResId);
 
         btnLoginTab.setOnClickListener(v -> showLoginSection());
 
@@ -68,6 +73,16 @@ public class LoginActivity extends AppCompatActivity {
         llLoginSection.setVisibility(View.VISIBLE);
         llSignupSection.setVisibility(View.GONE);
         updateButtonStyles(true);
+    }
+
+    private void updateLogo(int themeResId) {
+        if (themeResId == R.style.Theme_MyGovCare_Blue) {
+            ivLogo.setImageResource(R.drawable.logo_blue);
+        } else if (themeResId == R.style.Theme_MyGovCare_Orange) {
+            ivLogo.setImageResource(R.drawable.logo_purple);
+        } else if (themeResId == R.style.Theme_MyGovCare_Green) {
+            ivLogo.setImageResource(R.drawable.logo_green);
+        }
     }
 
     private void showLoginSection() {

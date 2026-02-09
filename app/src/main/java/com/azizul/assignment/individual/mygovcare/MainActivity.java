@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        updateNavHeaderLogo(currentTheme);
+
         // --- ActionBarDrawerToggle Setup ---
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.nav_open, R.string.nav_close);
@@ -107,6 +110,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map_container);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
+        }
+    }
+
+    private void updateNavHeaderLogo(int themeResId) {
+        View headerView = navigationView.getHeaderView(0);
+        ImageView ivNavHeaderLogo = headerView.findViewById(R.id.iv_nav_header_logo);
+        if (themeResId == R.style.Theme_MyGovCare_Blue) {
+            ivNavHeaderLogo.setImageResource(R.drawable.logo_blue);
+        } else if (themeResId == R.style.Theme_MyGovCare_Orange) {
+            ivNavHeaderLogo.setImageResource(R.drawable.logo_purple);
+        } else if (themeResId == R.style.Theme_MyGovCare_Green) {
+            ivNavHeaderLogo.setImageResource(R.drawable.logo_green);
         }
     }
 

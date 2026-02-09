@@ -24,12 +24,55 @@
 
         <activity
             android:name=".LoginActivity"
+            android:enabled="false"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Blue Theme -->
+        <activity-alias
+            android:name=".LoginActivityBlue"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_blue"
+            android:label="@string/app_name"
+            android:targetActivity=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Orange Theme -->
+        <activity-alias
+            android:name=".LoginActivityOrange"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_orange"
+            android:label="@string/app_name"
+            android:targetActivity=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Green Theme -->
+        <activity-alias
+            android:name=".LoginActivityGreen"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_green"
+            android:label="@string/app_name"
+            android:targetActivity=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
         <activity
             android:name=".MainActivity"

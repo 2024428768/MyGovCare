@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -26,10 +27,12 @@ import com.google.android.material.navigation.NavigationView;
 public class AboutUsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "theme_prefs";
     private static final String THEME_KEY = "current_theme";
     private int currentTheme;
+    private ImageView ivLogo2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +49,19 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
 
         setContentView(R.layout.activity_about_us);
 
+        ivLogo2 = findViewById(R.id.iv_logo2);
+        updateLogo(currentTheme);
+
         // --- Toolbar Setup ---
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // --- DrawerLayout Setup ---
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        updateNavHeaderLogo(currentTheme);
 
         // --- ActionBarDrawerToggle Setup ---
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -102,6 +110,28 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
         getOnBackPressedDispatcher().addCallback(this, callback);
 
         navigationView.setCheckedItem(R.id.nav_about);
+    }
+
+    private void updateLogo(int themeResId) {
+        if (themeResId == R.style.Theme_MyGovCare_Blue) {
+            ivLogo2.setImageResource(R.drawable.logo_blue);
+        } else if (themeResId == R.style.Theme_MyGovCare_Orange) {
+            ivLogo2.setImageResource(R.drawable.logo_purple);
+        } else if (themeResId == R.style.Theme_MyGovCare_Green) {
+            ivLogo2.setImageResource(R.drawable.logo_green);
+        }
+    }
+
+    private void updateNavHeaderLogo(int themeResId) {
+        View headerView = navigationView.getHeaderView(0);
+        ImageView ivNavHeaderLogo = headerView.findViewById(R.id.iv_nav_header_logo);
+        if (themeResId == R.style.Theme_MyGovCare_Blue) {
+            ivNavHeaderLogo.setImageResource(R.drawable.logo_blue);
+        } else if (themeResId == R.style.Theme_MyGovCare_Orange) {
+            ivNavHeaderLogo.setImageResource(R.drawable.logo_purple);
+        } else if (themeResId == R.style.Theme_MyGovCare_Green) {
+            ivNavHeaderLogo.setImageResource(R.drawable.logo_green);
+        }
     }
 
     @Override
