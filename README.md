@@ -46,10 +46,27 @@ MyGovCare is a group project (ICT602) designed to address the critical need for 
 
 ## Screenshots
 
-Screenshots of the application UI are available in the [Screenshots](./Screenshots) folder.
+<img align="left" src="Screenshots/38.%20Tuesday,10-02-26%2002%2026%20PM.png" width="120"> <h3>Default Application Icon</h3> <p>The standard brand identity for MyGovCare, featuring the default blue color scheme used upon initial installation.</p> <br clear="left" />
 
-![Project logo](./Screenshots/38. Tuesday,10-02-26 02 26 PM.png)
+<img align="left" src="Screenshots/39.%20Tuesday,10-02-26%2002%2027%20PM.png" width="200"> <h3>User Authentication (Default)</h3> <p>A clean, minimalist login interface. Users can securely access their accounts or navigate to the sign-up flow. The second image shows the input state for user credentials.</p> <br clear="left" />
 
+<img align="left" src="Screenshots/41.%20Tuesday,10-02-26%2002%2029%20PM.png" width="200"> <h3>Main Dashboard & Healthcare Locator</h3> <p>The core feature of the app. It utilizes GPS to show the user's current location (blue dot) and identifies the nearest public clinics and hospitals (red markers). The floating 'Home' button allows users to instantly recenter the camera on their position.</p> <br clear="left" />
+
+<img align="left" src="Screenshots/45.%20Tuesday,10-02-26%2002%2030%20PM.png" width="200"> <h3>Navigation Drawer</h3> <p>An intuitive side menu providing seamless navigation between the Home, Settings, and About pages, alongside a clear Logout option for session management.</p> <br clear="left" />
+
+<img align="left" src="Screenshots/44.%20Tuesday,10-02-26%2002%2030%20PM.png" width="200"> <h3>Theme Settings</h3> <p>Users can customize their experience by changing the app’s primary theme. Options include Blue, Purple, and Green, which update the UI components and application icon globally.</p> <br clear="left" />
+
+<img align="left" src="Screenshots/48.%20Tuesday,10-02-26%2002%2031%20PM.png" width="120"> <h3>Dynamic App Icon</h3> <p>Demonstrating the dynamic icon change; when the user selects the Purple theme in settings, the home screen icon updates to match the new aesthetic.</p> <br clear="left" />
+
+<img align="left" src="Screenshots/52.%20Tuesday,10-02-26%2002%2032%20PM.png" width="200"> <h3>Themed Sign-Up Page</h3> <p>The registration interface tailored to the Purple theme. New users can create an account with username and password verification.</p> <br clear="left" />
+
+<img align="left" src="Screenshots/49.%20Tuesday,10-02-26%2002%2032%20PM.png" width="200"> <h3>Themed Login (Purple)</h3> <p>A visual comparison of the empty and filled login states while the Purple theme is active, ensuring a consistent user experience across the entire onboarding flow.</p> <br clear="left" />
+
+<img align="left" src="Screenshots/46.%20Tuesday,10-02-26%2002%2030%20PM.png" width="200"> <h3>About & Developer Info (Blue)</h3> <p>This section introduces the development team and provides essential project links, including the GitHub repository and YouTube demonstration. It also hosts the MIT License and legal copyright statements.</p> <br clear="left" />
+
+<img align="left" src="Screenshots/51.%20Tuesday,10-02-26%2002%2032%20PM.png" width="200"> <h3>About Page (Purple)</h3> <p>The About page updated with the purple theme, maintaining readability and legal transparency while following the user's UI preferences.</p> <br clear="left" />
+
+<img align="left" src="Screenshots/53.%20Tuesday,10-02-26%2002%2033%20PM.png" width="600"> <h3>Server-Side Location Reports</h3> <p>A web-based administrative dashboard that tracks and logs user activity. It captures the username, report timestamp, device User-Agent, and precise Latitude/Longitude coordinates for backend monitoring.</p> <br clear="left" />
 
 ## License
 
