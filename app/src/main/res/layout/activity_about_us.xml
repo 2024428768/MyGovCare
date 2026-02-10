@@ -269,11 +269,15 @@
                         android:text="GitHub Repository:"
                         android:textStyle="bold"
                         android:textColor="@color/black"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="[GitHub Link Placeholder]"
-                        android:textColor="@color/black"/>
+                        android:text="https://github.com/2024428768/MyGovCare"
+                        android:textColor="@color/black"
+                        android:autoLink="web"
+                        android:linksClickable="true"/>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -292,8 +296,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="[YouTube Link Placeholder]"
+                        android:autoLink="web"
+                        android:linksClickable="true"
+                        android:text="https://youtu.be/wegFgmz3S4w"
                         android:textColor="@color/black" />
+
                 </LinearLayout>
 
                 <!-- Copyright Statement -->
