@@ -10,7 +10,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -30,6 +32,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,24 +48,34 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap mMap;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private SharedPreferences sharedPreferences;
-    private static final String PREFS_NAME = "theme_prefs";
+    private SharedPreferences sharedPreferences, themePreferences;
+    private static final String USER_PREFS_NAME = "user_prefs";
+    private static final String THEME_PREFS_NAME = "theme_prefs";
     private static final String THEME_KEY = "current_theme";
+    private static final String KEY_USER_ID = "user_id";
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_REMEMBER_ME = "remember_me";
     private int currentTheme;
     private final String API_URL = "http://10.0.2.2/MyGovCare/MyGovCare.php";
+    private final String REPORT_LOCATION_URL = "http://10.0.2.2/MyGovCare/report_location.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        currentTheme = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        themePreferences = getSharedPreferences(THEME_PREFS_NAME, MODE_PRIVATE);
+        currentTheme = themePreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
         setTheme(currentTheme);
 
         super.onCreate(savedInstanceState);
+
+        sharedPreferences = getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
 
         // Enable Edge-to-Edge with white icons
         EdgeToEdge.enable(this,
@@ -70,6 +83,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT));
 
         setContentView(R.layout.activity_main);
+
+        // --- Display Username ---
+        TextView tvUsername = findViewById(R.id.tv_username);
+        String username = sharedPreferences.getString(KEY_USERNAME, "User");
+        tvUsername.setText(username);
 
         // --- Toolbar Setup ---
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -80,7 +98,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        updateNavHeaderLogo(currentTheme);
+        // --- Safe Header Initialization ---
+        setupNavHeader();
 
         // --- ActionBarDrawerToggle Setup ---
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -96,10 +115,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             mainContent.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom);
             toolbarContainer.setPadding(0, systemBars.top, 0, 0);
             if (navigationView.getHeaderCount() > 0) {
-                View header = navigationView.getHeaderView(0);
+                View navHeader = navigationView.getHeaderView(0);
                 float density = getResources().getDisplayMetrics().density;
                 int padding16 = (int) (16 * density);
-                header.setPadding(padding16, systemBars.top + padding16, padding16, padding16);
+                navHeader.setPadding(padding16, systemBars.top + padding16, padding16, padding16);
             }
             navigationView.setPadding(navigationView.getPaddingLeft(), navigationView.getPaddingTop(),
                     navigationView.getPaddingRight(), systemBars.bottom);
@@ -130,13 +149,41 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         FloatingActionButton fabRecenter = findViewById(R.id.fab_recenter);
         fabRecenter.setOnClickListener(v -> {
             if (mMap != null) {
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(5.75951038844194, 102.27496615814267)));
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(5.759624076254066, 102.27497625202761)));
             }
         });
     }
 
-    private void updateNavHeaderLogo(int themeResId) {
+    private void setupNavHeader() {
         View headerView = navigationView.getHeaderView(0);
+        if (headerView != null) {
+            // Update Username
+            TextView navUsername = headerView.findViewById(R.id.tv_nav_username);
+            String username = sharedPreferences.getString(KEY_USERNAME, "User");
+            navUsername.setText("Hello, " + username);
+
+            // Update Logo
+            updateNavHeaderLogo(currentTheme, headerView);
+
+            // Setup Logout Button
+            Button btnLogout = headerView.findViewById(R.id.btn_logout);
+            if (btnLogout != null) {
+                btnLogout.setOnClickListener(v -> handleLogout());
+            }
+        }
+    }
+
+    private void handleLogout() {
+        // Use clear() and commit() for a robust, synchronous logout
+        sharedPreferences.edit().clear().commit();
+
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void updateNavHeaderLogo(int themeResId, View headerView) {
         ImageView ivNavHeaderLogo = headerView.findViewById(R.id.iv_nav_header_logo);
         if (themeResId == R.style.Theme_MyGovCare_Blue) {
             ivNavHeaderLogo.setImageResource(R.drawable.logo_blue);
@@ -154,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (navigationView != null) {
             navigationView.setCheckedItem(R.id.nav_home);
         }
-        int newTheme = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        int newTheme = themePreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
         if (this.currentTheme != newTheme) {
             recreate();
         }
@@ -167,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this));
 
         // Center map on "Campus"
-        LatLng campusLocation = new LatLng(5.75951038844194, 102.27496615814267);
+        LatLng campusLocation = new LatLng(5.759624076254066, 102.27497625202761);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusLocation, 14));
 
         // Add a marker for the user's location
@@ -181,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .flat(true)); // Keep the icon flat on the map
 
         fetchPublicHealth();
+        reportLocation(campusLocation);
 
     }
 
@@ -211,6 +259,34 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         );
 
         queue.add(request);
+    }
+
+    private void reportLocation(LatLng location) {
+        final int userId = sharedPreferences.getInt(KEY_USER_ID, -1);
+
+        if (userId == -1) {
+            return; // Don't report if user ID is not available
+        }
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, REPORT_LOCATION_URL,
+                response -> {
+                    // Optional: Handle response, e.g., log success or failure
+                },
+                error -> {
+                    // Optional: Handle error
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", String.valueOf(userId));
+                params.put("latitude", String.valueOf(location.latitude));
+                params.put("longitude", String.valueOf(location.longitude));
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
     @Override

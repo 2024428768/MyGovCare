@@ -10,8 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -33,18 +35,24 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private SharedPreferences sharedPreferences;
-    private static final String PREFS_NAME = "theme_prefs";
+    private SharedPreferences sharedPreferences, themePreferences;
+    private static final String USER_PREFS_NAME = "user_prefs";
+    private static final String THEME_PREFS_NAME = "theme_prefs";
     private static final String THEME_KEY = "current_theme";
+    private static final String KEY_USER_ID = "user_id";
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_REMEMBER_ME = "remember_me";
     private int currentTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        currentTheme = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        themePreferences = getSharedPreferences(THEME_PREFS_NAME, MODE_PRIVATE);
+        currentTheme = themePreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
         setTheme(currentTheme);
 
         super.onCreate(savedInstanceState);
+
+        sharedPreferences = getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
 
         // Enable Edge-to-Edge with white icons
         EdgeToEdge.enable(this,
@@ -62,7 +70,8 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        updateNavHeaderLogo(currentTheme);
+        // --- Safe Header Initialization ---
+        setupNavHeader();
 
         // --- ActionBarDrawerToggle Setup ---
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -78,7 +87,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerColors.setAdapter(adapter);
 
-        int currentThemeResId = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        int currentThemeResId = themePreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
         if (currentThemeResId == R.style.Theme_MyGovCare_Blue) {
             spinnerColors.setSelection(0);
         } else if (currentThemeResId == R.style.Theme_MyGovCare_Orange) {
@@ -108,8 +117,8 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                         break;
                 }
 
-                if (sharedPreferences.getInt(THEME_KEY, 0) != selectedTheme) {
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                if (themePreferences.getInt(THEME_KEY, 0) != selectedTheme) {
+                    SharedPreferences.Editor editor = themePreferences.edit();
                     editor.putInt(THEME_KEY, selectedTheme);
                     editor.apply();
 
@@ -163,6 +172,35 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         navigationView.setCheckedItem(R.id.nav_settings);
     }
 
+    private void setupNavHeader() {
+        View headerView = navigationView.getHeaderView(0);
+        if (headerView != null) {
+            // Update Username
+            TextView navUsername = headerView.findViewById(R.id.tv_nav_username);
+            String username = sharedPreferences.getString(KEY_USERNAME, "User");
+            navUsername.setText("Hello, " + username);
+
+            // Update Logo
+            updateNavHeaderLogo(currentTheme, headerView);
+
+            // Setup Logout Button
+            Button btnLogout = headerView.findViewById(R.id.btn_logout);
+            if (btnLogout != null) {
+                btnLogout.setOnClickListener(v -> handleLogout());
+            }
+        }
+    }
+
+    private void handleLogout() {
+        // Use clear() and commit() for a robust, synchronous logout
+        sharedPreferences.edit().clear().commit();
+
+        Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     private void updateAppIcon(String selectedAlias) {
         PackageManager pm = getPackageManager();
         String packageName = getPackageName();
@@ -180,8 +218,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
     }
 
-    private void updateNavHeaderLogo(int themeResId) {
-        View headerView = navigationView.getHeaderView(0);
+    private void updateNavHeaderLogo(int themeResId, View headerView) {
         ImageView ivNavHeaderLogo = headerView.findViewById(R.id.iv_nav_header_logo);
         if (themeResId == R.style.Theme_MyGovCare_Blue) {
             ivNavHeaderLogo.setImageResource(R.drawable.logo_blue);
@@ -195,7 +232,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onResume() {
         super.onResume();
-        int newTheme = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        int newTheme = themePreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
         if (this.currentTheme != newTheme) {
             recreate();
         }

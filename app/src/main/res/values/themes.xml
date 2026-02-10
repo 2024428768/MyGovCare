@@ -54,4 +54,10 @@
         <item name="infoWindowBackground">@color/info_window_background_green</item>
         <item name="infoWindowStrokeColor">@color/info_window_stroke_green</item>
     </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
 </resources>

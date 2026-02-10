@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -28,19 +30,25 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private SharedPreferences sharedPreferences;
-    private static final String PREFS_NAME = "theme_prefs";
+    private SharedPreferences sharedPreferences, themePreferences;
+    private static final String USER_PREFS_NAME = "user_prefs";
+    private static final String THEME_PREFS_NAME = "theme_prefs";
     private static final String THEME_KEY = "current_theme";
+    private static final String KEY_USER_ID = "user_id";
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_REMEMBER_ME = "remember_me";
     private int currentTheme;
     private ImageView ivLogo2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        currentTheme = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        themePreferences = getSharedPreferences(THEME_PREFS_NAME, MODE_PRIVATE);
+        currentTheme = themePreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
         setTheme(currentTheme);
 
         super.onCreate(savedInstanceState);
+
+        sharedPreferences = getSharedPreferences(USER_PREFS_NAME, MODE_PRIVATE);
 
         // Enable Edge-to-Edge with white icons
         EdgeToEdge.enable(this,
@@ -61,7 +69,8 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        updateNavHeaderLogo(currentTheme);
+        // --- Safe Header Initialization ---
+        setupNavHeader();
 
         // --- ActionBarDrawerToggle Setup ---
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -112,6 +121,35 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
         navigationView.setCheckedItem(R.id.nav_about);
     }
 
+    private void setupNavHeader() {
+        View headerView = navigationView.getHeaderView(0);
+        if (headerView != null) {
+            // Update Username
+            TextView navUsername = headerView.findViewById(R.id.tv_nav_username);
+            String username = sharedPreferences.getString(KEY_USERNAME, "User");
+            navUsername.setText("Hello, " + username);
+
+            // Update Logo
+            updateNavHeaderLogo(currentTheme, headerView);
+
+            // Setup Logout Button
+            Button btnLogout = headerView.findViewById(R.id.btn_logout);
+            if (btnLogout != null) {
+                btnLogout.setOnClickListener(v -> handleLogout());
+            }
+        }
+    }
+
+    private void handleLogout() {
+        // Use clear() and commit() for a robust, synchronous logout
+        sharedPreferences.edit().clear().commit();
+
+        Intent intent = new Intent(AboutUsActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     private void updateLogo(int themeResId) {
         if (themeResId == R.style.Theme_MyGovCare_Blue) {
             ivLogo2.setImageResource(R.drawable.logo_blue);
@@ -122,8 +160,7 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
         }
     }
 
-    private void updateNavHeaderLogo(int themeResId) {
-        View headerView = navigationView.getHeaderView(0);
+    private void updateNavHeaderLogo(int themeResId, View headerView) {
         ImageView ivNavHeaderLogo = headerView.findViewById(R.id.iv_nav_header_logo);
         if (themeResId == R.style.Theme_MyGovCare_Blue) {
             ivNavHeaderLogo.setImageResource(R.drawable.logo_blue);
@@ -137,7 +174,7 @@ public class AboutUsActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onResume() {
         super.onResume();
-        int newTheme = sharedPreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
+        int newTheme = themePreferences.getInt(THEME_KEY, R.style.Theme_MyGovCare);
         if (this.currentTheme != newTheme) {
             recreate();
         }

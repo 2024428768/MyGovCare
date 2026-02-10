@@ -8,6 +8,10 @@
     android:background="?attr/brandColor"
     tools:context=".LoginActivity">
 
+    <include
+        android:id="@+id/error_banner"
+        layout="@layout/error_banner" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -124,6 +128,16 @@
                 android:padding="12dp"
                 android:textColor="@color/black"
                 android:textColorHint="#CCCCCC" />
+
+            <CheckBox
+                android:id="@+id/cb_remember_me"
+                android:layout_width="wrap_content"
+                android:layout_height="27dp"
+                android:layout_marginTop="8dp"
+                android:buttonTint="?attr/brandColor"
+                android:text="Remember Me"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btn_login"
