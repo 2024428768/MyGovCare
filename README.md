@@ -63,9 +63,9 @@ MyGovCare is a group project (ICT602) designed to address the critical need for 
 
 <img align="left" src="Screenshots/46.%20Tuesday,10-02-26%2002%2030%20PM.png" width="200"> <h3>About & Developer Info (Blue)</h3> <p>This section introduces the development team and provides essential project links, including the GitHub repository and YouTube demonstration. It also hosts the MIT License and legal copyright statements.</p> <br clear="left" />
 
-<img align="left" src="Screenshots/51.%20Tuesday,10-02-26%2002%2032%20PM.png" width="200"> <h3>About Page (Purple)</h3> <p>The About page updated with the purple theme, maintaining readability and legal transparency while following the user's UI preferences.</p> <br clear="left" />
+<img align="left" src="Screenshots/56.%20Tuesday,10-02-26%2009%2002%20PM.png" width="200"> <h3>About Page (Purple)</h3> <p>The About page updated with the purple theme, maintaining readability and legal transparency while following the user's UI preferences.</p> <br clear="left" />
 
-<img align="left" src="Screenshots/53.%20Tuesday,10-02-26%2002%2033%20PM.png" width="600"> <h3>Server-Side Location Reports</h3> <p>A web-based administrative dashboard that tracks and logs user activity. It captures the username, report timestamp, device User-Agent, and precise Latitude/Longitude coordinates for backend monitoring.</p> <br clear="left" />
+<img align="left" src="Screenshots/55.%20Tuesday,10-02-26%2009%2001%20PM.png" width="600"> <h3>Server-Side Location Reports</h3> <p>A web-based administrative dashboard that tracks and logs user activity. It captures the username, report timestamp, device User-Agent, and precise Latitude/Longitude coordinates for backend monitoring.</p> <br clear="left" />
 
 ## License
 
