@@ -77,7 +77,7 @@ This project is licensed under the MIT License
 - APK File - Ready for installation on Android devices
 - Source Code - Available in this GitHub Repository
 - Screenshots - UI screenshots available in the Screenshots folder
-- YouTube Presentation - [Add your YouTube video link here]
+- YouTube Presentation - https://youtu.be/wegFgmz3S4w
 
 ---
 
