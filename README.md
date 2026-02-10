@@ -8,7 +8,6 @@ A mobile application that helps users find the nearest clinic and hospital near 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Screenshots](#screenshots)
-- [Getting Started](#getting-started)
 - [License](#license)
 - [Submission](#submission)
 
