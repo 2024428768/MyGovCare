@@ -48,6 +48,9 @@ MyGovCare is a group project (ICT602) designed to address the critical need for 
 
 Screenshots of the application UI are available in the [Screenshots](./Screenshots) folder.
 
+![Project logo](./Screenshots/38. Tuesday,10-02-26 02 26 PM.png)
+
+
 ## License
 
 This project is licensed under the MIT License
