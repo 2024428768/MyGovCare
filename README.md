@@ -20,7 +20,7 @@ MyGovCare is a group project (ICT602) designed to address the critical need for 
 
 | Name | Student ID | Group | Programme |
 |------|-----------|-------|-----------|
-| [Developer 1 Name] | [Student ID] | D1CS2405A | CS240 |
+| Azizul Hakim Bin Aznan | 2024428768 | D1CS2405A | CS240 |
 | [Developer 2 Name] | [Student ID] | D1CS2405A | CS240 |
 | [Developer 3 Name] | [Student ID] | D1CS2405A | CS240 |
 | [Developer 4 Name] | [Student ID] | D1CS2405A | CS240 |
@@ -50,7 +50,7 @@ Screenshots of the application UI are available in the [Screenshots](./Screensho
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT License
 
 ## Submission
 
