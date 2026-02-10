@@ -20,9 +20,9 @@ MyGovCare is a group project (ICT602) designed to address the critical need for 
 | Name | Student ID | Group | Programme |
 |------|-----------|-------|-----------|
 | Azizul Hakim Bin Aznan | 2024428768 | D1CS2405A | CS240 |
-| [Developer 2 Name] | [Student ID] | D1CS2405A | CS240 |
-| [Developer 3 Name] | [Student ID] | D1CS2405A | CS240 |
-| [Developer 4 Name] | [Student ID] | D1CS2405A | CS240 |
+| Mastura Nabilah Binti Mazlan | 2024938863 | D1CS2405C | CS240 |
+| Farah Nur Idayu Binti Zainal Abiddin | 2024652272 | D1CS2405D | CS240 |
+| Syahidatul Atikah Binti Saharuddin | 2024647216 | D1CS2405D | CS240 |
 
 ## Features
 
